@@ -1,0 +1,30 @@
+.artist-image {
+    width: 550px;
+    height: 380px;
+}
+
+.artistCard {
+    background-color: rgb(241, 228, 228);
+    border-color: rgb(167, 26, 26);
+    font-family: 'Abel', sans-serif;
+    margin: 10px;
+    padding: 5px;
+    border-style: solid;
+    box-shadow: 5px 5px gray;
+    text-align: center;
+}
+
+body {
+    font-family: 'Abel', sans-serif;
+    background-color: rgb(228, 230, 241);
+}
+
+#page-header {
+    font-family: 'Bungee Shade', cursive;
+    font-size: 1.5em;
+    
+}
+
+h2, h3, h4, h5 {
+    font-family: 'Bungee Shade', cursive;
+}
