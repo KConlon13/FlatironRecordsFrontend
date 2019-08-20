@@ -1,6 +1,7 @@
 .artist-image {
     width: 550px;
     height: 380px;
+    border-radius: 0.2em;
 }
 
 .artistCard {
@@ -28,10 +29,24 @@ body {
 
 h2, h3, h4, h5 {
     font-family: 'Bungee Shade', cursive;
+    opacity: 0.75;
 }
 
 .labelCard {
     padding-bottom: 40px;
-    border-bottom: solid;
+    border-bottom: solid rgba(80, 74, 74, 0.678);
 }
 
+h1 {
+    color: rgb(39, 93, 180);
+}
+
+.artistList {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.labelName {
+    padding-top: 10px;
+    color: black;
+}

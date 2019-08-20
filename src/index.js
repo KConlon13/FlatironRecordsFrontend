@@ -41,13 +41,13 @@ document.addEventListener("DOMContentLoaded", (e) => {
     function renderLabel(label){
         labelContainer.insertAdjacentHTML("beforeend", `
         <div class="labelCard" data-id=${label.id}>
-        <h2>${label.name}</h2>
+        <h2 class="labelName">${label.name}</h2>
         <p>${label.description}</p>
-        <h3>Artists:</h3>
+        <h3 class="artistList">Artists:</h3>
         <div id="label-artists" data-id=${label.id}></div>
         <div class="add-artist-container">
             <form class="add-artist-form" data-id=${label.id} style="">
-            <h3>Sign an Artist to ${label.name}!</h3>
+            <h3>Sign an Artist to ${label.name}:</h3>
             <input type="text" name="artist" value="" placeholder="Artist Name" class="input-text">
             <br>
             <input type="text" name="genre" value="" placeholder="Artist's Genre" class="input-text">
