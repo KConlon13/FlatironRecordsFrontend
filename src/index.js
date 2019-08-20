@@ -117,18 +117,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
         let id = e.target.dataset.id
         // this confirm is not working lol might have to drop and reseed
         if (e.target.className === "delete-btn"){
-            confirm("Are you sure you want to drop this artist?")
-            e.target.parentNode.remove()
-            fetch(`http://localhost:3000/api/artists/${id}`, {
-                method: "DELETE"
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch(function(error) {
-                console.error(error)
-            }) 
+            let deleteConfirmation = confirm("Are you sure you want to drop this artist?")
+            if (deleteConfirmation === true){
+                e.target.parentNode.remove()
+                fetch(`http://localhost:3000/api/artists/${id}`, {
+                    method: "DELETE"
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(function(error) {
+                    console.error(error)
+                }) 
+            }
             
         //// Patch for likes button 
         } else if (e.target.className === "like-btn"){
@@ -147,7 +149,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)
-                })
+            })
+            
+
         }
 
     })
