@@ -31,10 +31,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 <p class="likes" data-id=${artist.id}>${artist.likes}</p> 
                 <button data-id=${artist.id} class="like-btn">Like Artist</button>
                 <br>    
+                <p>Hate their new music?</p>
                 <button data-id=${artist.id} class="delete-btn">Drop Artist</button>
                 `)
             })
-        }) // maybe change artist.likes to 0
+        }) 
     }
     
     function renderLabel(label){
@@ -64,46 +65,41 @@ document.addEventListener("DOMContentLoaded", (e) => {
     }
     
     // Create New Artist
-
-    // const labelCard = document.querySelector(`.labelCard[data-id="${label.id}"]`)
-
     labelContainer.addEventListener("submit", (e) => {
         e.preventDefault()
-        console.log(e.target.dataset.id)
-        // let id = e.target.dataset.id
-
-    })
-
-
-    // function createArtist(form){
-    //     debugger
-    //     return fetch(`${artistUrl}`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             name: form.artist.value,
-    //             genre: form.genre.value,
-    //             biography: form.biography.value,
-    //             imageUrl: form.image.value     
-    //         })
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         form.reset()
-    //     })
-    // }
+        console.log(e.target)
+        debugger
+        let newArtistLabelId = e.target.dataset.id
+        fetch(`${artistUrl}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                name: e.target.artist.value,
+                genre: e.target.genre.value,
+                biography: e.target.biography.value,
+                imageUrl: e.target.image.value,
+                likes: 0,
+                labelId: newArtistLabelId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            // form.reset()
+        })
+    })  
 
 
 
     /// Delete Button (works!)
     labelContainer.addEventListener("click", (e) => {
         let id = e.target.dataset.id
-
+        // this confirm is not working lol might have to drop and reseed
         if (e.target.className === "delete-btn"){
+            confirm("Are you sure you want to drop this artist?")
             e.target.parentNode.remove()
             fetch(`http://localhost:3000/api/artists/${id}`, {
                 method: "DELETE"
@@ -118,7 +114,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
             
         //// Patch for likes button here (works!)
         } else if (e.target.className === "like-btn"){
-
             let pleaseWork = document.querySelector(`p.likes[data-id="${id}"]`)
             parseInt(pleaseWork.innerText++)
             fetch(`http://localhost:3000/api/artists/${id}`, {
