@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
     labelContainer.addEventListener("submit", (e) => {
         e.preventDefault()
         console.log(e.target)
-        debugger
         let newArtistLabelId = e.target.dataset.id
+        debugger
         fetch(`${artistUrl}`, {
             method: "POST",
             headers: {
@@ -82,19 +82,37 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 biography: e.target.biography.value,
                 imageUrl: e.target.image.value,
                 likes: 0,
-                labelId: newArtistLabelId
+                label_id: newArtistLabelId
             })
         })
         .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            // form.reset()
+        .then(artist => {
+            console.log(artist)
+            const labelArtists = document.querySelector(`#label-artists[data-id="${newArtistLabelId}"]`)
+            labelArtists.insertAdjacentHTML("beforeend", `
+            <div class="artistCard" data-id=${artist.id}>
+            <h2>${artist.name}</h2>
+            <p>Genre: ${artist.genre}</p>
+            <p>Bio: ${artist.biography}</p>
+            <img src=${artist.imageUrl} class="artist-image"/>
+            <br>
+            <p>Likes:</p>
+            <p class="likes" data-id=${artist.id}>${artist.likes}</p> 
+            <button data-id=${artist.id} class="like-btn">Like Artist</button>
+            <br>    
+            <p>Hate their new music?</p>
+            <button data-id=${artist.id} class="delete-btn">Drop Artist</button>
+            `)
+
+            e.target.artist.value = ""
+            e.target.genre.value = ""
+            e.target.biography.value = ""
+            e.target.image.value = ""
         })
     })  
 
 
-
-    /// Delete Button (works!)
+    /// Delete Button 
     labelContainer.addEventListener("click", (e) => {
         let id = e.target.dataset.id
         // this confirm is not working lol might have to drop and reseed
@@ -112,7 +130,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 console.error(error)
             }) 
             
-        //// Patch for likes button here (works!)
+        //// Patch for likes button 
         } else if (e.target.className === "like-btn"){
             let pleaseWork = document.querySelector(`p.likes[data-id="${id}"]`)
             parseInt(pleaseWork.innerText++)
