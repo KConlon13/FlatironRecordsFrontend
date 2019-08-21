@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", (e) => {
 
-    const labelContainer = document.getElementById("label-container")
-    const allLabels = []
     const labelUrl = "http://localhost:3000/api/labels"
     const artistUrl = "http://localhost:3000/api/artists"
-    const form = document.getElementById("add-artist-form")
+    const labelContainer = document.getElementById("label-container")
 
     
     /// Label Get Fetch
@@ -22,7 +20,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
             label.artists.forEach(artist => {
                 labelArtists.insertAdjacentHTML("beforeend", `
                 <div class="artistCard" data-id=${artist.id}>
-                <h2>${artist.name}</h2>
+                <h2 class="artistName">${artist.name}</h2>
                 <p>Genre: ${artist.genre}</p>
                 <p>Bio: ${artist.biography}</p>
                 <img src=${artist.imageUrl} class="artist-image"/>
@@ -61,7 +59,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         </div>
         </div>
         `)
-        allLabels.push(label)
     }
     
     // Create New Artist
@@ -69,7 +66,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
         e.preventDefault()
         console.log(e.target)
         let newArtistLabelId = e.target.dataset.id
-        debugger
         fetch(`${artistUrl}`, {
             method: "POST",
             headers: {
@@ -115,7 +111,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
     /// Delete Button 
     labelContainer.addEventListener("click", (e) => {
         let id = e.target.dataset.id
-        // this confirm is not working lol might have to drop and reseed
         if (e.target.className === "delete-btn"){
             let deleteConfirmation = confirm("Are you sure you want to drop this artist?")
             if (deleteConfirmation === true){
