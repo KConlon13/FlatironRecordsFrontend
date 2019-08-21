@@ -145,8 +145,6 @@ document.addEventListener("DOMContentLoaded", (e) => {
                 .then(data => {
                     console.log(data)
             })
-            
-
         }
 
     })

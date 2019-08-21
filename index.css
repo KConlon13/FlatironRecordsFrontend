@@ -63,6 +63,8 @@ h1 {
     background-color: rgba(240, 11, 11, 0.74);
     color: white;
     border-radius: 1em;
+    font-family: inherit;
+    font-size: 15px;
 }
 
 .delete-btn:hover {
@@ -76,6 +78,8 @@ h1 {
     background-color: rgba(240, 11, 11, 0.74);
     color: white;
     border-radius: 1em;
+    font-family: inherit;
+    font-size: 20px;
 }
 
 .like-btn:hover {
